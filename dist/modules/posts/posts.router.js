@@ -37,6 +37,11 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { statusCode, body } = yield posts_controller_1.default.getPosts(filters);
     res.status(statusCode).send(body);
 }));
+router.get("/keywordsFilter", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { words } = req.query;
+    const { statusCode, body } = yield posts_controller_1.default.getPostsByKeywords(words);
+    res.status(statusCode).send(body);
+}));
 router.get("/user", authentication_middlewares_1.isAuthenticated, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("posts for user");
     const { statusCode, body } = yield posts_controller_1.default.getPostsForUser(req);

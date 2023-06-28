@@ -3,3 +3,8 @@ export interface EmailOptions {
   message: string;
   subject: string;
 }
+
+export interface FilterByPictureResponse {
+  pictures: string[];
+  percentages: number[];
+}

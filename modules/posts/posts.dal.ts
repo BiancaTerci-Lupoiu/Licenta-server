@@ -35,6 +35,7 @@ export default class PostsDal {
     filters: PostFilters
   ): Promise<IPostModel[] | null> {
     const query: any = { isActive: true };
+    console.log(filters);
     if (filters.type) {
       query["category.type"] = { $in: filters.type };
     }
@@ -65,8 +66,10 @@ export default class PostsDal {
     if (filters.minPrice && filters.maxPrice) {
       query.price = { $gte: filters.minPrice, $lte: filters.maxPrice };
     }
+    const options = { collation: { locale: "en", strength: 1 } };
+    console.log(query);
     const posts: IPostModelWithId[] =
-      (await PostData.find(query).populate("user", {
+      (await PostData.find(query, {}, options).populate("user", {
         password: 0,
         role: 0,
         iban: 0,

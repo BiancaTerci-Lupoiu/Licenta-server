@@ -1,5 +1,6 @@
 import axios from "axios";
 import { config } from "../../config";
+import { FilterByPictureResponse } from "./interfaces";
 
 export const savePictureFeatures = async (pictureName: string) => {
   try {
@@ -12,9 +13,9 @@ export const savePictureFeatures = async (pictureName: string) => {
   }
 };
 
-export const filterPicturesByPicture: (pictureName: string) => Promise<{
-  pictures: string[];
-}> = async (pictureName: string) => {
+export const filterImagesByPicture: (
+  pictureName: string
+) => Promise<FilterByPictureResponse> = async (pictureName: string) => {
   try {
     const response = await axios.get(
       `${config.urlFiltersServer}/pictures/${pictureName}`

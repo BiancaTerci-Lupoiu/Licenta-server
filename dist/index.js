@@ -25,3 +25,7 @@ app.get("/health", (_req, res) => {
 app.listen(config_1.config.port, () => {
     console.log(`Server listening on port ${config_1.config.port}`);
 });
+const tsviz_1 = require("tsviz");
+const tsConfigDir = "./tsconfig.json";
+const modules = (0, tsviz_1.getModules)(tsConfigDir);
+const modulesDependencies = (0, tsviz_1.getModulesDependencies)(tsConfigDir);

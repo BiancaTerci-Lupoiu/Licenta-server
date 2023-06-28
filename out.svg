@@ -1,0 +1,1104 @@
+<svg version="1.1" baseProfile="full" width="14611.0" height="446.0" viewbox="0 0 14611 446" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[AuthenticationController||+static loginUser(): Promise&lt;ControllerResponse&lt;LoginUserResponseBody \| ControllerError&gt;&gt;;+static signupUser(): Promise&lt;ControllerResponse&lt;ControllerError \| RegisterUserResponseBody&gt;&gt;;+static confirmRegistration(): Promise&lt;ControllerResponse&lt;string \| ControllerError&gt;&gt;]
+[&lt;interface&gt;LoginUserRequestBody|+email: string;+password: string|]
+[&lt;interface&gt;LoginUserResponseBody|+token: string;+user: IUserModelWithoutSensitiveInfo|]
+[&lt;interface&gt;RegisterUserResponseBody|+message: string|]
+[AuthenticationService||+static loginUser(): Promise&lt;ControllerResponse&lt;LoginUserResponseBody \| ControllerError&gt;&gt;;+static signupUser(): Promise&lt;ControllerResponse&lt;ControllerError \| RegisterUserResponseBody&gt;&gt;;+static confirmRegistration(): Promise&lt;ControllerResponse&lt;string \| ControllerError&gt;&gt;]
+[PostsController||+static getPosts(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel\[\]&gt;&gt;;+static getPostsForUser(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel\[\]&gt;&gt;;+static getPostById(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static addPost(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static updatePost(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static uploadPostPicture(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static filterByPicture(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel\[\]&gt;&gt;;+static deletePost(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel&gt;&gt;]
+[PostsDal||+static getPostsList(): Promise&lt;IPostModel\[\] \| null&gt;;+static getPostsListFiltered(): Promise&lt;IPostModel\[\] \| null&gt;;+static getPostsForUser(): Promise&lt;IPostModel\[\] \| null&gt;;+static getPostById(): Promise&lt;IPostModelWithId \| null&gt;;+static getPostByIdWithoutPopulate(): Promise&lt;IPostModelWithId \| null&gt;;+static addPost(): Promise&lt;IPostModelWithId \| null&gt;;+static updatePost(): Promise&lt;IPostModelWithId \| null&gt;;+static deletePost(): Promise&lt;IPostModel \| null&gt;]
+[&lt;interface&gt;Category|+type: string;+secondType: string;+thirdType: string|]
+[&lt;interface&gt;Coordinates|+latitude: number;+longitude: number|]
+[&lt;interface&gt;IPostModel|+user: ObjectId;+isActive: boolean;+title: string;+description: string;+gender: Genders;+size: string;+condition: Condition;+style: string;+materials: string\[\];+price: number;+brand: string;+color: string;+picture: string \| undefined;+category: Category;+coordinates: Coordinates|]
+[&lt;interface&gt;AddPostBody|+postDetails: IPostModel;+address: Address;+iban: string \| undefined|]
+[&lt;interface&gt;IPostModelWithId|+_id: string|]
+[&lt;interface&gt;UpdatePostBody|+title: string \| undefined;+description: string \| undefined;+gender: Genders \| undefined;+size: string \| undefined;+condition: Condition \| undefined;+style: string \| undefined;+materials: string\[\] \| undefined;+price: number \| undefined;+brand: string \| undefined;+color: string \| undefined;+category: Category \| undefined;+picture: string \| undefined;+isActive: boolean \| undefined|]
+[&lt;interface&gt;PostFilters|+type: string\[\] \| undefined;+gender: string\[\] \| undefined;+style: string\[\] \| undefined;+materials: string\[\] \| undefined;+brand: string\[\] \| undefined;+color: string\[\] \| undefined;+size: string\[\] \| undefined;+secondType: string\[\] \| undefined;+minPrice: number \| undefined;+maxPrice: number \| undefined;+picture: string\[\] \| undefined|]
+[&lt;enumeration&gt;Genders|FEMALE;MALE;UNSPECIFIED]
+[&lt;enumeration&gt;Condition|GOOD;EXCELLENT;SATISFYING;UNWORN;NEW]
+[IPostModel]&lt;:--[IPostModelWithId]
+[PostsService||+static getPostsList(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel\[\]&gt;&gt;;+static getPostsForUser(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel\[\]&gt;&gt;;+static filterByPicture(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel\[\]&gt;&gt;;+static getPostById(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static addPost(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static updatePost(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static uploadPostPicture(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModelWithId&gt;&gt;;+static deletePost(): Promise&lt;ControllerResponse&lt;ControllerError \| IPostModel&gt;&gt;]
+[PurchasesController||+static getPurchases(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModel\[\]&gt;&gt;;+static getPurchaseById(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;;+static addPurchase(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;;+static updatePurchase(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;;+static deletePurchase(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModel&gt;&gt;;+static createCheckoutSession(): Promise&lt;ControllerResponse&lt;ControllerError \| CheckoutSessionResponse&gt;&gt;;+static stripeWebhook(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;]
+[PurchasesDal||+static getPurchasesList(): Promise&lt;IPurchaseModel\[\] \| null&gt;;+static getPurchaseById(): Promise&lt;IPurchaseModelWithId \| null&gt;;+static addNewPurchase(): Promise&lt;IPurchaseModelWithId \| null&gt;;+static updatePurchase(): Promise&lt;IPurchaseModelWithId \| null&gt;;+static deletePurchase(): Promise&lt;IPurchaseModel \| null&gt;]
+[&lt;interface&gt;IPurchaseModel|+userId: ObjectId;+postId: ObjectId;+status: PaymentStatus;+totalPrice: number \| undefined;+shipping: object \| undefined;+customerId: string \| undefined;+paymentIntentId: string \| undefined|]
+[&lt;interface&gt;UpdatePurchaseBody|+status: PaymentStatus \| undefined;+totalPrice: number \| undefined;+shipping: object \| undefined;+customerId: string \| undefined;+paymentIntentId: string \| undefined|]
+[&lt;interface&gt;IPurchaseModelWithId|+_id: string|]
+[&lt;interface&gt;CheckoutSessionResponse|+url: string|]
+[&lt;enumeration&gt;PaymentStatus|PENDING;COMPLETED;FAILED]
+[IPurchaseModel]&lt;:--[IPurchaseModelWithId]
+[PurchasesService||+static getPurchasesList(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModel\[\]&gt;&gt;;+static getPurchaseById(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;;+static addPurchase(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;;+static updatePurchase(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;;+static deletePurchase(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModel&gt;&gt;;+static createCheckoutSession(): Promise&lt;ControllerResponse&lt;ControllerError \| CheckoutSessionResponse&gt;&gt;;+static stripeWebhook(): Promise&lt;ControllerResponse&lt;ControllerError \| IPurchaseModelWithId&gt;&gt;]
+[UsersController||+static getUsers(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModel\[\]&gt;&gt;;+static getUserById(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModelWithoutSensitiveInfo&gt;&gt;;+static addUser(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModel&gt;&gt;;+static updateUser(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModelWithoutSensitiveInfo&gt;&gt;;+static getUserDetails(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModelWithoutSensitiveInfo&gt;&gt;]
+[UsersDal||+static getUsersList(): Promise&lt;IUserModel\[\] \| null&gt;;+static getUserById(): Promise&lt;IUserModelWithoutSensitiveInfo \| null&gt;;+static getUserByEmail(): Promise&lt;IUserModelWithId \| null&gt;;+static addNewUser(): Promise&lt;IUserModelWithId \| null&gt;;+static updateUser(): Promise&lt;IUserModelWithoutSensitiveInfo \| null&gt;;+static activateAccount(): Promise&lt;IUserModel \| null&gt;]
+[&lt;interface&gt;IUserModel|+firstName: string;+lastName: string;+email: string;+password: string;+phoneNumber: string;+role: UserRoles;+address: Address \| undefined;+iban: string \| undefined;+picture: string \| undefined;+status: AccountStatus;+confirmationToken: string|]
+[&lt;interface&gt;IUserModelWithId|+_id: string|]
+[&lt;interface&gt;AddUserBody|+firstName: string;+lastName: string;+email: string;+password: string;+phoneNumber: string;+address: Address \| undefined;+iban: string \| undefined|]
+[&lt;interface&gt;AddUserBodyWithRegistrationToken|+confirmationToken: string|]
+[&lt;interface&gt;UpdateUserBody|+firstName: string \| undefined;+lastName: string \| undefined;+phoneNumber: string \| undefined;+address: Address \| undefined;+iban: string \| undefined;+picture: string \| undefined|]
+[&lt;interface&gt;NewUser|+name: string;+email: string;+role: UserRoles|]
+[&lt;interface&gt;Address|+locality: string;+city: string;+street: string;+number: number;+zipCode: number;+coordinates: { latitude: number; longitude: number; } \| undefined|]
+[&lt;enumeration&gt;UserRoles|USER;ADMIN]
+[&lt;enumeration&gt;AccountStatus|PENDING;ACTIVE]
+[IUserModel]&lt;:--[IUserModelWithId]
+[AddUserBody]&lt;:--[AddUserBodyWithRegistrationToken]
+[UsersService||+static getUsersList(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModel\[\]&gt;&gt;;+static getUserById(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModelWithoutSensitiveInfo&gt;&gt;;+static addUser(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModel&gt;&gt;;+static updateUser(): Promise&lt;ControllerResponse&lt;ControllerError \| IUserModelWithoutSensitiveInfo&gt;&gt;]
+[&lt;interface&gt;EmailOptions|+email: string;+message: string;+subject: string|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="446.0" width="14611.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)" fill="#eee8d5" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+<g stroke-dasharray="6 6">
+<path d="M4539.0 293.3 L4539 300 L4539 320 L4539.0 320.0 " fill="none"></path>
+</g>
+<path d="M4544.3 293.3 L4539.0 293.3 L4533.7 293.3 L4539.0 280.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M8378.0 233.3 L8378 300 L8378 320 L8378.0 320.0 " fill="none"></path>
+</g>
+<path d="M8383.3 233.3 L8378.0 233.3 L8372.7 233.3 L8378.0 220.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M11928.5 263.3 L11928.5 300 L11928.5 320 L11928.5 320.0 " fill="none"></path>
+</g>
+<path d="M11933.8 263.3 L11928.5 263.3 L11923.2 263.3 L11928.5 250.0 Z"></path>
+<g stroke-dasharray="6 6">
+<path d="M12227.5 233.3 L12227.5 300 L12227.5 320 L12227.5 320.0 " fill="none"></path>
+</g>
+<path d="M12232.8 233.3 L12227.5 233.3 L12222.2 233.3 L12227.5 220.0 Z"></path>
+<g data-name="AuthenticationController">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthenticationController">
+<rect x="0.0" y="90.0" height="100.0" width="800.0" data-name="AuthenticationController"></rect>
+<path d="M0.0 121.0 L800.0 121.0" fill="none" data-name="AuthenticationController"></path>
+<path d="M0.0 129.0 L800.0 129.0" fill="none" data-name="AuthenticationController"></path>
+</g>
+<g transform="translate(0, 90)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthenticationController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthenticationController">
+<a id="modules\authentication\authentication.controller.ts.AuthenticationController" xlink:href="modules\authentication\authentication.controller.ts"><text x="392.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthenticationController">AuthenticationController</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticationController">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthenticationController">
+
+</g>
+</g>
+<g transform="translate(0, 129)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticationController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthenticationController">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthenticationController">+static loginUser(): Promise&lt;ControllerResponse&lt;LoginUserResponseBody | ControllerError&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthenticationController">+static signupUser(): Promise&lt;ControllerResponse&lt;ControllerError | RegisterUserResponseBody&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AuthenticationController">+static confirmRegistration(): Promise&lt;ControllerResponse&lt;string | ControllerError&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="LoginUserRequestBody">
+<g fill="lightblue" stroke="#33322E" data-name="LoginUserRequestBody">
+<rect x="840.0" y="97.5" height="85.0" width="203.0" data-name="LoginUserRequestBody"></rect>
+<path d="M840.0 128.5 L1043.0 128.5" fill="none" data-name="LoginUserRequestBody"></path>
+<path d="M840.0 174.5 L1043.0 174.5" fill="none" data-name="LoginUserRequestBody"></path>
+</g>
+<g transform="translate(840, 97.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginUserRequestBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoginUserRequestBody">
+<a id="modules\authentication\authentication.model.ts.LoginUserRequestBody" xlink:href="modules\authentication\authentication.model.ts"><text x="93.5" y="13.5" stroke="none" text-anchor="middle" data-name="LoginUserRequestBody">LoginUserRequestBody</text></a>
+
+</g>
+</g>
+<g transform="translate(840, 128.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginUserRequestBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoginUserRequestBody">
+<text x="0.0" y="13.5" stroke="none" data-name="LoginUserRequestBody">+email: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="LoginUserRequestBody">+password: string</text>
+
+</g>
+</g>
+<g transform="translate(840, 174.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginUserRequestBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LoginUserRequestBody">
+
+</g>
+</g>
+</g>
+<g data-name="LoginUserResponseBody">
+<g fill="lightblue" stroke="#33322E" data-name="LoginUserResponseBody">
+<rect x="1083.0" y="97.5" height="85.0" width="323.0" data-name="LoginUserResponseBody"></rect>
+<path d="M1083.0 128.5 L1406.0 128.5" fill="none" data-name="LoginUserResponseBody"></path>
+<path d="M1083.0 174.5 L1406.0 174.5" fill="none" data-name="LoginUserResponseBody"></path>
+</g>
+<g transform="translate(1083, 97.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginUserResponseBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="LoginUserResponseBody">
+<a id="modules\authentication\authentication.model.ts.LoginUserResponseBody" xlink:href="modules\authentication\authentication.model.ts"><text x="153.5" y="13.5" stroke="none" text-anchor="middle" data-name="LoginUserResponseBody">LoginUserResponseBody</text></a>
+
+</g>
+</g>
+<g transform="translate(1083, 128.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginUserResponseBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="LoginUserResponseBody">
+<text x="0.0" y="13.5" stroke="none" data-name="LoginUserResponseBody">+token: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="LoginUserResponseBody">+user: IUserModelWithoutSensitiveInfo</text>
+
+</g>
+</g>
+<g transform="translate(1083, 174.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="LoginUserResponseBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="LoginUserResponseBody">
+
+</g>
+</g>
+</g>
+<g data-name="RegisterUserResponseBody">
+<g fill="lightblue" stroke="#33322E" data-name="RegisterUserResponseBody">
+<rect x="1446.0" y="105.0" height="70.0" width="239.0" data-name="RegisterUserResponseBody"></rect>
+<path d="M1446.0 136.0 L1685.0 136.0" fill="none" data-name="RegisterUserResponseBody"></path>
+<path d="M1446.0 167.0 L1685.0 167.0" fill="none" data-name="RegisterUserResponseBody"></path>
+</g>
+<g transform="translate(1446, 105)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterUserResponseBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="RegisterUserResponseBody">
+<a id="modules\authentication\authentication.model.ts.RegisterUserResponseBody" xlink:href="modules\authentication\authentication.model.ts"><text x="111.5" y="13.5" stroke="none" text-anchor="middle" data-name="RegisterUserResponseBody">RegisterUserResponseBody</text></a>
+
+</g>
+</g>
+<g transform="translate(1446, 136)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterUserResponseBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="RegisterUserResponseBody">
+<text x="0.0" y="13.5" stroke="none" data-name="RegisterUserResponseBody">+message: string</text>
+
+</g>
+</g>
+<g transform="translate(1446, 167)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="RegisterUserResponseBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="RegisterUserResponseBody">
+
+</g>
+</g>
+</g>
+<g data-name="AuthenticationService">
+<g fill="#eee8d5" stroke="#33322E" data-name="AuthenticationService">
+<rect x="1725.0" y="90.0" height="100.0" width="800.0" data-name="AuthenticationService"></rect>
+<path d="M1725.0 121.0 L2525.0 121.0" fill="none" data-name="AuthenticationService"></path>
+<path d="M1725.0 129.0 L2525.0 129.0" fill="none" data-name="AuthenticationService"></path>
+</g>
+<g transform="translate(1725, 90)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="AuthenticationService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AuthenticationService">
+<a id="modules\authentication\authentication.service.ts.AuthenticationService" xlink:href="modules\authentication\authentication.service.ts"><text x="392.0" y="13.5" stroke="none" text-anchor="middle" data-name="AuthenticationService">AuthenticationService</text></a>
+
+</g>
+</g>
+<g transform="translate(1725, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticationService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AuthenticationService">
+
+</g>
+</g>
+<g transform="translate(1725, 129)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AuthenticationService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AuthenticationService">
+<text x="0.0" y="13.5" stroke="none" data-name="AuthenticationService">+static loginUser(): Promise&lt;ControllerResponse&lt;LoginUserResponseBody | ControllerError&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AuthenticationService">+static signupUser(): Promise&lt;ControllerResponse&lt;ControllerError | RegisterUserResponseBody&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AuthenticationService">+static confirmRegistration(): Promise&lt;ControllerResponse&lt;string | ControllerError&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PostsController">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsController">
+<rect x="2565.0" y="52.5" height="175.0" width="769.0" data-name="PostsController"></rect>
+<path d="M2565.0 83.5 L3334.0 83.5" fill="none" data-name="PostsController"></path>
+<path d="M2565.0 91.5 L3334.0 91.5" fill="none" data-name="PostsController"></path>
+</g>
+<g transform="translate(2565, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsController">
+<a id="modules\posts\posts.controller.ts.PostsController" xlink:href="modules\posts\posts.controller.ts"><text x="376.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostsController">PostsController</text></a>
+
+</g>
+</g>
+<g transform="translate(2565, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsController">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostsController">
+
+</g>
+</g>
+<g transform="translate(2565, 91.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsController">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsController">+static getPosts(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel[]&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsController">+static getPostsForUser(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel[]&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsController">+static getPostById(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostsController">+static addPost(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostsController">+static updatePost(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostsController">+static uploadPostPicture(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostsController">+static filterByPicture(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel[]&gt;&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PostsController">+static deletePost(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PostsDal">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsDal">
+<rect x="3374.0" y="52.5" height="175.0" width="585.0" data-name="PostsDal"></rect>
+<path d="M3374.0 83.5 L3959.0 83.5" fill="none" data-name="PostsDal"></path>
+<path d="M3374.0 91.5 L3959.0 91.5" fill="none" data-name="PostsDal"></path>
+</g>
+<g transform="translate(3374, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsDal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsDal">
+<a id="modules\posts\posts.dal.ts.PostsDal" xlink:href="modules\posts\posts.dal.ts"><text x="284.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostsDal">PostsDal</text></a>
+
+</g>
+</g>
+<g transform="translate(3374, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsDal">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostsDal">
+
+</g>
+</g>
+<g transform="translate(3374, 91.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsDal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsDal">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsDal">+static getPostsList(): Promise&lt;IPostModel[] | null&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsDal">+static getPostsListFiltered(): Promise&lt;IPostModel[] | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsDal">+static getPostsForUser(): Promise&lt;IPostModel[] | null&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostsDal">+static getPostById(): Promise&lt;IPostModelWithId | null&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostsDal">+static getPostByIdWithoutPopulate(): Promise&lt;IPostModelWithId | null&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostsDal">+static addPost(): Promise&lt;IPostModelWithId | null&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostsDal">+static updatePost(): Promise&lt;IPostModelWithId | null&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PostsDal">+static deletePost(): Promise&lt;IPostModel | null&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="Category">
+<g fill="lightblue" stroke="#33322E" data-name="Category">
+<rect x="3999.0" y="90.0" height="100.0" width="177.0" data-name="Category"></rect>
+<path d="M3999.0 121.0 L4176.0 121.0" fill="none" data-name="Category"></path>
+<path d="M3999.0 182.0 L4176.0 182.0" fill="none" data-name="Category"></path>
+</g>
+<g transform="translate(3999, 90)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Category">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Category">
+<a id="modules\posts\posts.models.ts.Category" xlink:href="modules\posts\posts.models.ts"><text x="80.5" y="13.5" stroke="none" text-anchor="middle" data-name="Category">Category</text></a>
+
+</g>
+</g>
+<g transform="translate(3999, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Category">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Category">
+<text x="0.0" y="13.5" stroke="none" data-name="Category">+type: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Category">+secondType: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Category">+thirdType: string</text>
+
+</g>
+</g>
+<g transform="translate(3999, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Category">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Category">
+
+</g>
+</g>
+</g>
+<g data-name="Coordinates">
+<g fill="lightblue" stroke="#33322E" data-name="Coordinates">
+<rect x="4216.0" y="97.5" height="85.0" width="169.0" data-name="Coordinates"></rect>
+<path d="M4216.0 128.5 L4385.0 128.5" fill="none" data-name="Coordinates"></path>
+<path d="M4216.0 174.5 L4385.0 174.5" fill="none" data-name="Coordinates"></path>
+</g>
+<g transform="translate(4216, 97.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Coordinates">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Coordinates">
+<a id="modules\posts\posts.models.ts.Coordinates" xlink:href="modules\posts\posts.models.ts"><text x="76.5" y="13.5" stroke="none" text-anchor="middle" data-name="Coordinates">Coordinates</text></a>
+
+</g>
+</g>
+<g transform="translate(4216, 128.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Coordinates">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Coordinates">
+<text x="0.0" y="13.5" stroke="none" data-name="Coordinates">+latitude: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Coordinates">+longitude: number</text>
+
+</g>
+</g>
+<g transform="translate(4216, 174.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Coordinates">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Coordinates">
+
+</g>
+</g>
+</g>
+<g data-name="IPostModel">
+<g fill="lightblue" stroke="#33322E" data-name="IPostModel">
+<rect x="4425.0" y="0.0" height="280.0" width="228.0" data-name="IPostModel"></rect>
+<path d="M4425.0 31.0 L4653.0 31.0" fill="none" data-name="IPostModel"></path>
+<path d="M4425.0 272.0 L4653.0 272.0" fill="none" data-name="IPostModel"></path>
+</g>
+<g transform="translate(4425, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPostModel">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IPostModel">
+<a id="modules\posts\posts.models.ts.IPostModel" xlink:href="modules\posts\posts.models.ts"><text x="106.0" y="13.5" stroke="none" text-anchor="middle" data-name="IPostModel">IPostModel</text></a>
+
+</g>
+</g>
+<g transform="translate(4425, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPostModel">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IPostModel">
+<text x="0.0" y="13.5" stroke="none" data-name="IPostModel">+user: ObjectId</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IPostModel">+isActive: boolean</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IPostModel">+title: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IPostModel">+description: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IPostModel">+gender: Genders</text>
+<text x="0.0" y="88.5" stroke="none" data-name="IPostModel">+size: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="IPostModel">+condition: Condition</text>
+<text x="0.0" y="118.5" stroke="none" data-name="IPostModel">+style: string</text>
+<text x="0.0" y="133.5" stroke="none" data-name="IPostModel">+materials: string[]</text>
+<text x="0.0" y="148.5" stroke="none" data-name="IPostModel">+price: number</text>
+<text x="0.0" y="163.5" stroke="none" data-name="IPostModel">+brand: string</text>
+<text x="0.0" y="178.5" stroke="none" data-name="IPostModel">+color: string</text>
+<text x="0.0" y="193.5" stroke="none" data-name="IPostModel">+picture: string | undefined</text>
+<text x="0.0" y="208.5" stroke="none" data-name="IPostModel">+category: Category</text>
+<text x="0.0" y="223.5" stroke="none" data-name="IPostModel">+coordinates: Coordinates</text>
+
+</g>
+</g>
+<g transform="translate(4425, 272)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPostModel">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IPostModel">
+
+</g>
+</g>
+</g>
+<g data-name="AddPostBody">
+<g fill="lightblue" stroke="#33322E" data-name="AddPostBody">
+<rect x="4693.0" y="90.0" height="100.0" width="212.0" data-name="AddPostBody"></rect>
+<path d="M4693.0 121.0 L4905.0 121.0" fill="none" data-name="AddPostBody"></path>
+<path d="M4693.0 182.0 L4905.0 182.0" fill="none" data-name="AddPostBody"></path>
+</g>
+<g transform="translate(4693, 90)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddPostBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AddPostBody">
+<a id="modules\posts\posts.models.ts.AddPostBody" xlink:href="modules\posts\posts.models.ts"><text x="98.0" y="13.5" stroke="none" text-anchor="middle" data-name="AddPostBody">AddPostBody</text></a>
+
+</g>
+</g>
+<g transform="translate(4693, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddPostBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AddPostBody">
+<text x="0.0" y="13.5" stroke="none" data-name="AddPostBody">+postDetails: IPostModel</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AddPostBody">+address: Address</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AddPostBody">+iban: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(4693, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddPostBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AddPostBody">
+
+</g>
+</g>
+</g>
+<g data-name="IPostModelWithId">
+<g fill="lightblue" stroke="#33322E" data-name="IPostModelWithId">
+<rect x="4462.0" y="320.0" height="70.0" width="154.0" data-name="IPostModelWithId"></rect>
+<path d="M4462.0 351.0 L4616.0 351.0" fill="none" data-name="IPostModelWithId"></path>
+<path d="M4462.0 382.0 L4616.0 382.0" fill="none" data-name="IPostModelWithId"></path>
+</g>
+<g transform="translate(4462, 320)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPostModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IPostModelWithId">
+<a id="modules\posts\posts.models.ts.IPostModelWithId" xlink:href="modules\posts\posts.models.ts"><text x="69.0" y="13.5" stroke="none" text-anchor="middle" data-name="IPostModelWithId">IPostModelWithId</text></a>
+
+</g>
+</g>
+<g transform="translate(4462, 351)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPostModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IPostModelWithId">
+<text x="0.0" y="13.5" stroke="none" data-name="IPostModelWithId">+_id: string</text>
+
+</g>
+</g>
+<g transform="translate(4462, 382)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPostModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IPostModelWithId">
+
+</g>
+</g>
+</g>
+<g data-name="UpdatePostBody">
+<g fill="lightblue" stroke="#33322E" data-name="UpdatePostBody">
+<rect x="4945.0" y="15.0" height="250.0" width="277.0" data-name="UpdatePostBody"></rect>
+<path d="M4945.0 46.0 L5222.0 46.0" fill="none" data-name="UpdatePostBody"></path>
+<path d="M4945.0 257.0 L5222.0 257.0" fill="none" data-name="UpdatePostBody"></path>
+</g>
+<g transform="translate(4945, 15)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdatePostBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UpdatePostBody">
+<a id="modules\posts\posts.models.ts.UpdatePostBody" xlink:href="modules\posts\posts.models.ts"><text x="130.5" y="13.5" stroke="none" text-anchor="middle" data-name="UpdatePostBody">UpdatePostBody</text></a>
+
+</g>
+</g>
+<g transform="translate(4945, 46)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdatePostBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UpdatePostBody">
+<text x="0.0" y="13.5" stroke="none" data-name="UpdatePostBody">+title: string | undefined</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UpdatePostBody">+description: string | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UpdatePostBody">+gender: Genders | undefined</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UpdatePostBody">+size: string | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UpdatePostBody">+condition: Condition | undefined</text>
+<text x="0.0" y="88.5" stroke="none" data-name="UpdatePostBody">+style: string | undefined</text>
+<text x="0.0" y="103.5" stroke="none" data-name="UpdatePostBody">+materials: string[] | undefined</text>
+<text x="0.0" y="118.5" stroke="none" data-name="UpdatePostBody">+price: number | undefined</text>
+<text x="0.0" y="133.5" stroke="none" data-name="UpdatePostBody">+brand: string | undefined</text>
+<text x="0.0" y="148.5" stroke="none" data-name="UpdatePostBody">+color: string | undefined</text>
+<text x="0.0" y="163.5" stroke="none" data-name="UpdatePostBody">+category: Category | undefined</text>
+<text x="0.0" y="178.5" stroke="none" data-name="UpdatePostBody">+picture: string | undefined</text>
+<text x="0.0" y="193.5" stroke="none" data-name="UpdatePostBody">+isActive: boolean | undefined</text>
+
+</g>
+</g>
+<g transform="translate(4945, 257)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdatePostBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UpdatePostBody">
+
+</g>
+</g>
+</g>
+<g data-name="PostFilters">
+<g fill="lightblue" stroke="#33322E" data-name="PostFilters">
+<rect x="5262.0" y="30.0" height="220.0" width="281.0" data-name="PostFilters"></rect>
+<path d="M5262.0 61.0 L5543.0 61.0" fill="none" data-name="PostFilters"></path>
+<path d="M5262.0 242.0 L5543.0 242.0" fill="none" data-name="PostFilters"></path>
+</g>
+<g transform="translate(5262, 30)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostFilters">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostFilters">
+<a id="modules\posts\posts.models.ts.PostFilters" xlink:href="modules\posts\posts.models.ts"><text x="132.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostFilters">PostFilters</text></a>
+
+</g>
+</g>
+<g transform="translate(5262, 61)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostFilters">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostFilters">
+<text x="0.0" y="13.5" stroke="none" data-name="PostFilters">+type: string[] | undefined</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostFilters">+gender: string[] | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostFilters">+style: string[] | undefined</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostFilters">+materials: string[] | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostFilters">+brand: string[] | undefined</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostFilters">+color: string[] | undefined</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostFilters">+size: string[] | undefined</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PostFilters">+secondType: string[] | undefined</text>
+<text x="0.0" y="133.5" stroke="none" data-name="PostFilters">+minPrice: number | undefined</text>
+<text x="0.0" y="148.5" stroke="none" data-name="PostFilters">+maxPrice: number | undefined</text>
+<text x="0.0" y="163.5" stroke="none" data-name="PostFilters">+picture: string[] | undefined</text>
+
+</g>
+</g>
+<g transform="translate(5262, 242)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostFilters">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostFilters">
+
+</g>
+</g>
+</g>
+<g data-name="Genders">
+<g fill="lightgreen" stroke="#33322E" data-name="Genders">
+<rect x="5583.0" y="94.0" height="92.0" width="128.0" data-name="Genders"></rect>
+<path d="M5583.0 125.0 L5711.0 125.0" fill="none" data-name="Genders"></path>
+</g>
+<g transform="translate(5583, 94)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Genders">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Genders">
+<a id="modules\posts\posts.models.ts.Genders" xlink:href="modules\posts\posts.models.ts"><text x="56.0" y="13.5" stroke="none" text-anchor="middle" data-name="Genders">Genders</text></a>
+
+</g>
+</g>
+<g transform="translate(5583, 125)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Genders">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Genders">
+<text x="0.0" y="13.5" stroke="none" data-name="Genders">FEMALE</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Genders">MALE</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Genders">UNSPECIFIED</text>
+
+</g>
+</g>
+</g>
+<g data-name="Condition">
+<g fill="lightgreen" stroke="#33322E" data-name="Condition">
+<rect x="5751.0" y="79.0" height="122.0" width="115.0" data-name="Condition"></rect>
+<path d="M5751.0 110.0 L5866.0 110.0" fill="none" data-name="Condition"></path>
+</g>
+<g transform="translate(5751, 79)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Condition">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Condition">
+<a id="modules\posts\posts.models.ts.Condition" xlink:href="modules\posts\posts.models.ts"><text x="49.5" y="13.5" stroke="none" text-anchor="middle" data-name="Condition">Condition</text></a>
+
+</g>
+</g>
+<g transform="translate(5751, 110)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Condition">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Condition">
+<text x="0.0" y="13.5" stroke="none" data-name="Condition">GOOD</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Condition">EXCELLENT</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Condition">SATISFYING</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Condition">UNWORN</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Condition">NEW</text>
+
+</g>
+</g>
+</g>
+<g data-name="PostsService">
+<g fill="#eee8d5" stroke="#33322E" data-name="PostsService">
+<rect x="5906.0" y="52.5" height="175.0" width="769.0" data-name="PostsService"></rect>
+<path d="M5906.0 83.5 L6675.0 83.5" fill="none" data-name="PostsService"></path>
+<path d="M5906.0 91.5 L6675.0 91.5" fill="none" data-name="PostsService"></path>
+</g>
+<g transform="translate(5906, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PostsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PostsService">
+<a id="modules\posts\posts.service.ts.PostsService" xlink:href="modules\posts\posts.service.ts"><text x="376.5" y="13.5" stroke="none" text-anchor="middle" data-name="PostsService">PostsService</text></a>
+
+</g>
+</g>
+<g transform="translate(5906, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PostsService">
+
+</g>
+</g>
+<g transform="translate(5906, 91.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PostsService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PostsService">
+<text x="0.0" y="13.5" stroke="none" data-name="PostsService">+static getPostsList(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel[]&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PostsService">+static getPostsForUser(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel[]&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PostsService">+static filterByPicture(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel[]&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PostsService">+static getPostById(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PostsService">+static addPost(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PostsService">+static updatePost(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PostsService">+static uploadPostPicture(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModelWithId&gt;&gt;</text>
+<text x="0.0" y="118.5" stroke="none" data-name="PostsService">+static deletePost(): Promise&lt;ControllerResponse&lt;ControllerError | IPostModel&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PurchasesController">
+<g fill="#eee8d5" stroke="#33322E" data-name="PurchasesController">
+<rect x="6715.0" y="60.0" height="160.0" width="893.0" data-name="PurchasesController"></rect>
+<path d="M6715.0 91.0 L7608.0 91.0" fill="none" data-name="PurchasesController"></path>
+<path d="M6715.0 99.0 L7608.0 99.0" fill="none" data-name="PurchasesController"></path>
+</g>
+<g transform="translate(6715, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PurchasesController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PurchasesController">
+<a id="modules\purchases\purchases.controller.ts.PurchasesController" xlink:href="modules\purchases\purchases.controller.ts"><text x="438.5" y="13.5" stroke="none" text-anchor="middle" data-name="PurchasesController">PurchasesController</text></a>
+
+</g>
+</g>
+<g transform="translate(6715, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PurchasesController">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PurchasesController">
+
+</g>
+</g>
+<g transform="translate(6715, 99)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PurchasesController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PurchasesController">
+<text x="0.0" y="13.5" stroke="none" data-name="PurchasesController">+static getPurchases(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModel[]&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PurchasesController">+static getPurchaseById(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PurchasesController">+static addPurchase(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PurchasesController">+static updatePurchase(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PurchasesController">+static deletePurchase(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModel&gt;&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PurchasesController">+static createCheckoutSession(): Promise&lt;ControllerResponse&lt;ControllerError | CheckoutSessionResponse&gt;&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PurchasesController">+static stripeWebhook(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="PurchasesDal">
+<g fill="#eee8d5" stroke="#33322E" data-name="PurchasesDal">
+<rect x="7648.0" y="75.0" height="130.0" width="539.0" data-name="PurchasesDal"></rect>
+<path d="M7648.0 106.0 L8187.0 106.0" fill="none" data-name="PurchasesDal"></path>
+<path d="M7648.0 114.0 L8187.0 114.0" fill="none" data-name="PurchasesDal"></path>
+</g>
+<g transform="translate(7648, 75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PurchasesDal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PurchasesDal">
+<a id="modules\purchases\purchases.dal.ts.PurchasesDal" xlink:href="modules\purchases\purchases.dal.ts"><text x="261.5" y="13.5" stroke="none" text-anchor="middle" data-name="PurchasesDal">PurchasesDal</text></a>
+
+</g>
+</g>
+<g transform="translate(7648, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PurchasesDal">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PurchasesDal">
+
+</g>
+</g>
+<g transform="translate(7648, 114)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PurchasesDal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PurchasesDal">
+<text x="0.0" y="13.5" stroke="none" data-name="PurchasesDal">+static getPurchasesList(): Promise&lt;IPurchaseModel[] | null&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PurchasesDal">+static getPurchaseById(): Promise&lt;IPurchaseModelWithId | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PurchasesDal">+static addNewPurchase(): Promise&lt;IPurchaseModelWithId | null&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PurchasesDal">+static updatePurchase(): Promise&lt;IPurchaseModelWithId | null&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PurchasesDal">+static deletePurchase(): Promise&lt;IPurchaseModel | null&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="IPurchaseModel">
+<g fill="lightblue" stroke="#33322E" data-name="IPurchaseModel">
+<rect x="8227.0" y="60.0" height="160.0" width="302.0" data-name="IPurchaseModel"></rect>
+<path d="M8227.0 91.0 L8529.0 91.0" fill="none" data-name="IPurchaseModel"></path>
+<path d="M8227.0 212.0 L8529.0 212.0" fill="none" data-name="IPurchaseModel"></path>
+</g>
+<g transform="translate(8227, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPurchaseModel">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IPurchaseModel">
+<a id="modules\purchases\purchases.models.ts.IPurchaseModel" xlink:href="modules\purchases\purchases.models.ts"><text x="143.0" y="13.5" stroke="none" text-anchor="middle" data-name="IPurchaseModel">IPurchaseModel</text></a>
+
+</g>
+</g>
+<g transform="translate(8227, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPurchaseModel">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IPurchaseModel">
+<text x="0.0" y="13.5" stroke="none" data-name="IPurchaseModel">+userId: ObjectId</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IPurchaseModel">+postId: ObjectId</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IPurchaseModel">+status: PaymentStatus</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IPurchaseModel">+totalPrice: number | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IPurchaseModel">+shipping: object | undefined</text>
+<text x="0.0" y="88.5" stroke="none" data-name="IPurchaseModel">+customerId: string | undefined</text>
+<text x="0.0" y="103.5" stroke="none" data-name="IPurchaseModel">+paymentIntentId: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(8227, 212)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPurchaseModel">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IPurchaseModel">
+
+</g>
+</g>
+</g>
+<g data-name="UpdatePurchaseBody">
+<g fill="lightblue" stroke="#33322E" data-name="UpdatePurchaseBody">
+<rect x="8569.0" y="75.0" height="130.0" width="302.0" data-name="UpdatePurchaseBody"></rect>
+<path d="M8569.0 106.0 L8871.0 106.0" fill="none" data-name="UpdatePurchaseBody"></path>
+<path d="M8569.0 197.0 L8871.0 197.0" fill="none" data-name="UpdatePurchaseBody"></path>
+</g>
+<g transform="translate(8569, 75)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdatePurchaseBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UpdatePurchaseBody">
+<a id="modules\purchases\purchases.models.ts.UpdatePurchaseBody" xlink:href="modules\purchases\purchases.models.ts"><text x="143.0" y="13.5" stroke="none" text-anchor="middle" data-name="UpdatePurchaseBody">UpdatePurchaseBody</text></a>
+
+</g>
+</g>
+<g transform="translate(8569, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdatePurchaseBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UpdatePurchaseBody">
+<text x="0.0" y="13.5" stroke="none" data-name="UpdatePurchaseBody">+status: PaymentStatus | undefined</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UpdatePurchaseBody">+totalPrice: number | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UpdatePurchaseBody">+shipping: object | undefined</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UpdatePurchaseBody">+customerId: string | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UpdatePurchaseBody">+paymentIntentId: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(8569, 197)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdatePurchaseBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UpdatePurchaseBody">
+
+</g>
+</g>
+</g>
+<g data-name="IPurchaseModelWithId">
+<g fill="lightblue" stroke="#33322E" data-name="IPurchaseModelWithId">
+<rect x="8281.0" y="320.0" height="70.0" width="194.0" data-name="IPurchaseModelWithId"></rect>
+<path d="M8281.0 351.0 L8475.0 351.0" fill="none" data-name="IPurchaseModelWithId"></path>
+<path d="M8281.0 382.0 L8475.0 382.0" fill="none" data-name="IPurchaseModelWithId"></path>
+</g>
+<g transform="translate(8281, 320)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPurchaseModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IPurchaseModelWithId">
+<a id="modules\purchases\purchases.models.ts.IPurchaseModelWithId" xlink:href="modules\purchases\purchases.models.ts"><text x="89.0" y="13.5" stroke="none" text-anchor="middle" data-name="IPurchaseModelWithId">IPurchaseModelWithId</text></a>
+
+</g>
+</g>
+<g transform="translate(8281, 351)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPurchaseModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IPurchaseModelWithId">
+<text x="0.0" y="13.5" stroke="none" data-name="IPurchaseModelWithId">+_id: string</text>
+
+</g>
+</g>
+<g transform="translate(8281, 382)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IPurchaseModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IPurchaseModelWithId">
+
+</g>
+</g>
+</g>
+<g data-name="CheckoutSessionResponse">
+<g fill="lightblue" stroke="#33322E" data-name="CheckoutSessionResponse">
+<rect x="8911.0" y="105.0" height="70.0" width="234.0" data-name="CheckoutSessionResponse"></rect>
+<path d="M8911.0 136.0 L9145.0 136.0" fill="none" data-name="CheckoutSessionResponse"></path>
+<path d="M8911.0 167.0 L9145.0 167.0" fill="none" data-name="CheckoutSessionResponse"></path>
+</g>
+<g transform="translate(8911, 105)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CheckoutSessionResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="CheckoutSessionResponse">
+<a id="modules\purchases\purchases.models.ts.CheckoutSessionResponse" xlink:href="modules\purchases\purchases.models.ts"><text x="109.0" y="13.5" stroke="none" text-anchor="middle" data-name="CheckoutSessionResponse">CheckoutSessionResponse</text></a>
+
+</g>
+</g>
+<g transform="translate(8911, 136)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CheckoutSessionResponse">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="CheckoutSessionResponse">
+<text x="0.0" y="13.5" stroke="none" data-name="CheckoutSessionResponse">+url: string</text>
+
+</g>
+</g>
+<g transform="translate(8911, 167)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="CheckoutSessionResponse">
+<g transform="translate(8, 8)" fill="#33322E" data-name="CheckoutSessionResponse">
+
+</g>
+</g>
+</g>
+<g data-name="PaymentStatus">
+<g fill="lightgreen" stroke="#33322E" data-name="PaymentStatus">
+<rect x="9185.0" y="94.0" height="92.0" width="135.0" data-name="PaymentStatus"></rect>
+<path d="M9185.0 125.0 L9320.0 125.0" fill="none" data-name="PaymentStatus"></path>
+</g>
+<g transform="translate(9185, 94)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PaymentStatus">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PaymentStatus">
+<a id="modules\purchases\purchases.models.ts.PaymentStatus" xlink:href="modules\purchases\purchases.models.ts"><text x="59.5" y="13.5" stroke="none" text-anchor="middle" data-name="PaymentStatus">PaymentStatus</text></a>
+
+</g>
+</g>
+<g transform="translate(9185, 125)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PaymentStatus">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PaymentStatus">
+<text x="0.0" y="13.5" stroke="none" data-name="PaymentStatus">PENDING</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PaymentStatus">COMPLETED</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PaymentStatus">FAILED</text>
+
+</g>
+</g>
+</g>
+<g data-name="PurchasesService">
+<g fill="#eee8d5" stroke="#33322E" data-name="PurchasesService">
+<rect x="9360.0" y="60.0" height="160.0" width="893.0" data-name="PurchasesService"></rect>
+<path d="M9360.0 91.0 L10253.0 91.0" fill="none" data-name="PurchasesService"></path>
+<path d="M9360.0 99.0 L10253.0 99.0" fill="none" data-name="PurchasesService"></path>
+</g>
+<g transform="translate(9360, 60)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="PurchasesService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="PurchasesService">
+<a id="modules\purchases\purchases.service.ts.PurchasesService" xlink:href="modules\purchases\purchases.service.ts"><text x="438.5" y="13.5" stroke="none" text-anchor="middle" data-name="PurchasesService">PurchasesService</text></a>
+
+</g>
+</g>
+<g transform="translate(9360, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PurchasesService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="PurchasesService">
+
+</g>
+</g>
+<g transform="translate(9360, 99)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="PurchasesService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="PurchasesService">
+<text x="0.0" y="13.5" stroke="none" data-name="PurchasesService">+static getPurchasesList(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModel[]&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="PurchasesService">+static getPurchaseById(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="PurchasesService">+static addPurchase(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="PurchasesService">+static updatePurchase(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="PurchasesService">+static deletePurchase(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModel&gt;&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="PurchasesService">+static createCheckoutSession(): Promise&lt;ControllerResponse&lt;ControllerError | CheckoutSessionResponse&gt;&gt;</text>
+<text x="0.0" y="103.5" stroke="none" data-name="PurchasesService">+static stripeWebhook(): Promise&lt;ControllerResponse&lt;ControllerError | IPurchaseModelWithId&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersController">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersController">
+<rect x="10293.0" y="75.0" height="130.0" width="855.0" data-name="UsersController"></rect>
+<path d="M10293.0 106.0 L11148.0 106.0" fill="none" data-name="UsersController"></path>
+<path d="M10293.0 114.0 L11148.0 114.0" fill="none" data-name="UsersController"></path>
+</g>
+<g transform="translate(10293, 75)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersController">
+<a id="modules\users\users.controller.ts.UsersController" xlink:href="modules\users\users.controller.ts"><text x="419.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersController">UsersController</text></a>
+
+</g>
+</g>
+<g transform="translate(10293, 106)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersController">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersController">
+
+</g>
+</g>
+<g transform="translate(10293, 114)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersController">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersController">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersController">+static getUsers(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModel[]&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersController">+static getUserById(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModelWithoutSensitiveInfo&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersController">+static addUser(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModel&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UsersController">+static updateUser(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModelWithoutSensitiveInfo&gt;&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UsersController">+static getUserDetails(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModelWithoutSensitiveInfo&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersDal">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersDal">
+<rect x="11188.0" y="67.5" height="145.0" width="571.0" data-name="UsersDal"></rect>
+<path d="M11188.0 98.5 L11759.0 98.5" fill="none" data-name="UsersDal"></path>
+<path d="M11188.0 106.5 L11759.0 106.5" fill="none" data-name="UsersDal"></path>
+</g>
+<g transform="translate(11188, 67.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersDal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersDal">
+<a id="modules\users\users.dal.ts.UsersDal" xlink:href="modules\users\users.dal.ts"><text x="277.5" y="13.5" stroke="none" text-anchor="middle" data-name="UsersDal">UsersDal</text></a>
+
+</g>
+</g>
+<g transform="translate(11188, 98.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersDal">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersDal">
+
+</g>
+</g>
+<g transform="translate(11188, 106.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersDal">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersDal">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersDal">+static getUsersList(): Promise&lt;IUserModel[] | null&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersDal">+static getUserById(): Promise&lt;IUserModelWithoutSensitiveInfo | null&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersDal">+static getUserByEmail(): Promise&lt;IUserModelWithId | null&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UsersDal">+static addNewUser(): Promise&lt;IUserModelWithId | null&gt;</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UsersDal">+static updateUser(): Promise&lt;IUserModelWithoutSensitiveInfo | null&gt;</text>
+<text x="0.0" y="88.5" stroke="none" data-name="UsersDal">+static activateAccount(): Promise&lt;IUserModel | null&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="IUserModel">
+<g fill="lightblue" stroke="#33322E" data-name="IUserModel">
+<rect x="11799.0" y="30.0" height="220.0" width="259.0" data-name="IUserModel"></rect>
+<path d="M11799.0 61.0 L12058.0 61.0" fill="none" data-name="IUserModel"></path>
+<path d="M11799.0 242.0 L12058.0 242.0" fill="none" data-name="IUserModel"></path>
+</g>
+<g transform="translate(11799, 30)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUserModel">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IUserModel">
+<a id="modules\users\users.models.ts.IUserModel" xlink:href="modules\users\users.models.ts"><text x="121.5" y="13.5" stroke="none" text-anchor="middle" data-name="IUserModel">IUserModel</text></a>
+
+</g>
+</g>
+<g transform="translate(11799, 61)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUserModel">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IUserModel">
+<text x="0.0" y="13.5" stroke="none" data-name="IUserModel">+firstName: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IUserModel">+lastName: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IUserModel">+email: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IUserModel">+password: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IUserModel">+phoneNumber: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="IUserModel">+role: UserRoles</text>
+<text x="0.0" y="103.5" stroke="none" data-name="IUserModel">+address: Address | undefined</text>
+<text x="0.0" y="118.5" stroke="none" data-name="IUserModel">+iban: string | undefined</text>
+<text x="0.0" y="133.5" stroke="none" data-name="IUserModel">+picture: string | undefined</text>
+<text x="0.0" y="148.5" stroke="none" data-name="IUserModel">+status: AccountStatus</text>
+<text x="0.0" y="163.5" stroke="none" data-name="IUserModel">+confirmationToken: string</text>
+
+</g>
+</g>
+<g transform="translate(11799, 242)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUserModel">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IUserModel">
+
+</g>
+</g>
+</g>
+<g data-name="IUserModelWithId">
+<g fill="lightblue" stroke="#33322E" data-name="IUserModelWithId">
+<rect x="11850.5" y="320.0" height="70.0" width="156.0" data-name="IUserModelWithId"></rect>
+<path d="M11850.5 351.0 L12006.5 351.0" fill="none" data-name="IUserModelWithId"></path>
+<path d="M11850.5 382.0 L12006.5 382.0" fill="none" data-name="IUserModelWithId"></path>
+</g>
+<g transform="translate(11850.5, 320)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUserModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IUserModelWithId">
+<a id="modules\users\users.models.ts.IUserModelWithId" xlink:href="modules\users\users.models.ts"><text x="70.0" y="13.5" stroke="none" text-anchor="middle" data-name="IUserModelWithId">IUserModelWithId</text></a>
+
+</g>
+</g>
+<g transform="translate(11850.5, 351)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUserModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IUserModelWithId">
+<text x="0.0" y="13.5" stroke="none" data-name="IUserModelWithId">+_id: string</text>
+
+</g>
+</g>
+<g transform="translate(11850.5, 382)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IUserModelWithId">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IUserModelWithId">
+
+</g>
+</g>
+</g>
+<g data-name="AddUserBody">
+<g fill="lightblue" stroke="#33322E" data-name="AddUserBody">
+<rect x="12098.0" y="60.0" height="160.0" width="259.0" data-name="AddUserBody"></rect>
+<path d="M12098.0 91.0 L12357.0 91.0" fill="none" data-name="AddUserBody"></path>
+<path d="M12098.0 212.0 L12357.0 212.0" fill="none" data-name="AddUserBody"></path>
+</g>
+<g transform="translate(12098, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddUserBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AddUserBody">
+<a id="modules\users\users.models.ts.AddUserBody" xlink:href="modules\users\users.models.ts"><text x="121.5" y="13.5" stroke="none" text-anchor="middle" data-name="AddUserBody">AddUserBody</text></a>
+
+</g>
+</g>
+<g transform="translate(12098, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddUserBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AddUserBody">
+<text x="0.0" y="13.5" stroke="none" data-name="AddUserBody">+firstName: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AddUserBody">+lastName: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="AddUserBody">+email: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="AddUserBody">+password: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="AddUserBody">+phoneNumber: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="AddUserBody">+address: Address | undefined</text>
+<text x="0.0" y="103.5" stroke="none" data-name="AddUserBody">+iban: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(12098, 212)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddUserBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AddUserBody">
+
+</g>
+</g>
+</g>
+<g data-name="AddUserBodyWithRegistrationToken">
+<g fill="lightblue" stroke="#33322E" data-name="AddUserBodyWithRegistrationToken">
+<rect x="12076.0" y="320.0" height="70.0" width="303.0" data-name="AddUserBodyWithRegistrationToken"></rect>
+<path d="M12076.0 351.0 L12379.0 351.0" fill="none" data-name="AddUserBodyWithRegistrationToken"></path>
+<path d="M12076.0 382.0 L12379.0 382.0" fill="none" data-name="AddUserBodyWithRegistrationToken"></path>
+</g>
+<g transform="translate(12076, 320)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddUserBodyWithRegistrationToken">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AddUserBodyWithRegistrationToken">
+<a id="modules\users\users.models.ts.AddUserBodyWithRegistrationToken" xlink:href="modules\users\users.models.ts"><text x="143.5" y="13.5" stroke="none" text-anchor="middle" data-name="AddUserBodyWithRegistrationToken">AddUserBodyWithRegistrationToken</text></a>
+
+</g>
+</g>
+<g transform="translate(12076, 351)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddUserBodyWithRegistrationToken">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AddUserBodyWithRegistrationToken">
+<text x="0.0" y="13.5" stroke="none" data-name="AddUserBodyWithRegistrationToken">+confirmationToken: string</text>
+
+</g>
+</g>
+<g transform="translate(12076, 382)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AddUserBodyWithRegistrationToken">
+<g transform="translate(8, 8)" fill="#33322E" data-name="AddUserBodyWithRegistrationToken">
+
+</g>
+</g>
+</g>
+<g data-name="UpdateUserBody">
+<g fill="lightblue" stroke="#33322E" data-name="UpdateUserBody">
+<rect x="12397.0" y="67.5" height="145.0" width="286.0" data-name="UpdateUserBody"></rect>
+<path d="M12397.0 98.5 L12683.0 98.5" fill="none" data-name="UpdateUserBody"></path>
+<path d="M12397.0 204.5 L12683.0 204.5" fill="none" data-name="UpdateUserBody"></path>
+</g>
+<g transform="translate(12397, 67.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateUserBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UpdateUserBody">
+<a id="modules\users\users.models.ts.UpdateUserBody" xlink:href="modules\users\users.models.ts"><text x="135.0" y="13.5" stroke="none" text-anchor="middle" data-name="UpdateUserBody">UpdateUserBody</text></a>
+
+</g>
+</g>
+<g transform="translate(12397, 98.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateUserBody">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UpdateUserBody">
+<text x="0.0" y="13.5" stroke="none" data-name="UpdateUserBody">+firstName: string | undefined</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UpdateUserBody">+lastName: string | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UpdateUserBody">+phoneNumber: string | undefined</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UpdateUserBody">+address: Address | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="UpdateUserBody">+iban: string | undefined</text>
+<text x="0.0" y="88.5" stroke="none" data-name="UpdateUserBody">+picture: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(12397, 204.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UpdateUserBody">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UpdateUserBody">
+
+</g>
+</g>
+</g>
+<g data-name="NewUser">
+<g fill="lightblue" stroke="#33322E" data-name="NewUser">
+<rect x="12723.0" y="90.0" height="100.0" width="148.0" data-name="NewUser"></rect>
+<path d="M12723.0 121.0 L12871.0 121.0" fill="none" data-name="NewUser"></path>
+<path d="M12723.0 182.0 L12871.0 182.0" fill="none" data-name="NewUser"></path>
+</g>
+<g transform="translate(12723, 90)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="NewUser">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="NewUser">
+<a id="modules\users\users.models.ts.NewUser" xlink:href="modules\users\users.models.ts"><text x="66.0" y="13.5" stroke="none" text-anchor="middle" data-name="NewUser">NewUser</text></a>
+
+</g>
+</g>
+<g transform="translate(12723, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="NewUser">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="NewUser">
+<text x="0.0" y="13.5" stroke="none" data-name="NewUser">+name: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="NewUser">+email: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="NewUser">+role: UserRoles</text>
+
+</g>
+</g>
+<g transform="translate(12723, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="NewUser">
+<g transform="translate(8, 8)" fill="#33322E" data-name="NewUser">
+
+</g>
+</g>
+</g>
+<g data-name="Address">
+<g fill="lightblue" stroke="#33322E" data-name="Address">
+<rect x="12911.0" y="52.5" height="175.0" width="268.0" data-name="Address"></rect>
+<path d="M12911.0 83.5 L13179.0 83.5" fill="none" data-name="Address"></path>
+<path d="M12911.0 219.5 L13179.0 219.5" fill="none" data-name="Address"></path>
+</g>
+<g transform="translate(12911, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Address">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Address">
+<a id="modules\users\users.models.ts.Address" xlink:href="modules\users\users.models.ts"><text x="126.0" y="13.5" stroke="none" text-anchor="middle" data-name="Address">Address</text></a>
+
+</g>
+</g>
+<g transform="translate(12911, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Address">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Address">
+<text x="0.0" y="13.5" stroke="none" data-name="Address">+locality: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Address">+city: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Address">+street: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Address">+number: number</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Address">+zipCode: number</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Address">+coordinates: { latitude: number</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Address">longitude: number</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Address">} | undefined</text>
+
+</g>
+</g>
+<g transform="translate(12911, 219.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Address">
+<g transform="translate(8, 8)" fill="#33322E" data-name="Address">
+
+</g>
+</g>
+</g>
+<g data-name="UserRoles">
+<g fill="lightgreen" stroke="#33322E" data-name="UserRoles">
+<rect x="13219.0" y="101.5" height="77.0" width="98.0" data-name="UserRoles"></rect>
+<path d="M13219.0 132.5 L13317.0 132.5" fill="none" data-name="UserRoles"></path>
+</g>
+<g transform="translate(13219, 101.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserRoles">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UserRoles">
+<a id="modules\users\users.models.ts.UserRoles" xlink:href="modules\users\users.models.ts"><text x="41.0" y="13.5" stroke="none" text-anchor="middle" data-name="UserRoles">UserRoles</text></a>
+
+</g>
+</g>
+<g transform="translate(13219, 132.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UserRoles">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UserRoles">
+<text x="0.0" y="13.5" stroke="none" data-name="UserRoles">USER</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UserRoles">ADMIN</text>
+
+</g>
+</g>
+</g>
+<g data-name="AccountStatus">
+<g fill="lightgreen" stroke="#33322E" data-name="AccountStatus">
+<rect x="13357.0" y="101.5" height="77.0" width="130.0" data-name="AccountStatus"></rect>
+<path d="M13357.0 132.5 L13487.0 132.5" fill="none" data-name="AccountStatus"></path>
+</g>
+<g transform="translate(13357, 101.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AccountStatus">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="AccountStatus">
+<a id="modules\users\users.models.ts.AccountStatus" xlink:href="modules\users\users.models.ts"><text x="57.0" y="13.5" stroke="none" text-anchor="middle" data-name="AccountStatus">AccountStatus</text></a>
+
+</g>
+</g>
+<g transform="translate(13357, 132.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="AccountStatus">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="AccountStatus">
+<text x="0.0" y="13.5" stroke="none" data-name="AccountStatus">PENDING</text>
+<text x="0.0" y="28.5" stroke="none" data-name="AccountStatus">ACTIVE</text>
+
+</g>
+</g>
+</g>
+<g data-name="UsersService">
+<g fill="#eee8d5" stroke="#33322E" data-name="UsersService">
+<rect x="13527.0" y="82.5" height="115.0" width="836.0" data-name="UsersService"></rect>
+<path d="M13527.0 113.5 L14363.0 113.5" fill="none" data-name="UsersService"></path>
+<path d="M13527.0 121.5 L14363.0 121.5" fill="none" data-name="UsersService"></path>
+</g>
+<g transform="translate(13527, 82.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="UsersService">
+<a id="modules\users\users.service.ts.UsersService" xlink:href="modules\users\users.service.ts"><text x="410.0" y="13.5" stroke="none" text-anchor="middle" data-name="UsersService">UsersService</text></a>
+
+</g>
+</g>
+<g transform="translate(13527, 113.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" data-name="UsersService">
+
+</g>
+</g>
+<g transform="translate(13527, 121.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="UsersService">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="UsersService">
+<text x="0.0" y="13.5" stroke="none" data-name="UsersService">+static getUsersList(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModel[]&gt;&gt;</text>
+<text x="0.0" y="28.5" stroke="none" data-name="UsersService">+static getUserById(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModelWithoutSensitiveInfo&gt;&gt;</text>
+<text x="0.0" y="43.5" stroke="none" data-name="UsersService">+static addUser(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModel&gt;&gt;</text>
+<text x="0.0" y="58.5" stroke="none" data-name="UsersService">+static updateUser(): Promise&lt;ControllerResponse&lt;ControllerError | IUserModelWithoutSensitiveInfo&gt;&gt;</text>
+
+</g>
+</g>
+</g>
+<g data-name="EmailOptions">
+<g fill="lightblue" stroke="#33322E" data-name="EmailOptions">
+<rect x="14403.0" y="90.0" height="100.0" width="152.0" data-name="EmailOptions"></rect>
+<path d="M14403.0 121.0 L14555.0 121.0" fill="none" data-name="EmailOptions"></path>
+<path d="M14403.0 182.0 L14555.0 182.0" fill="none" data-name="EmailOptions"></path>
+</g>
+<g transform="translate(14403, 90)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EmailOptions">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="EmailOptions">
+<a id="modules\utils\interfaces.ts.EmailOptions" xlink:href="modules\utils\interfaces.ts"><text x="68.0" y="13.5" stroke="none" text-anchor="middle" data-name="EmailOptions">EmailOptions</text></a>
+
+</g>
+</g>
+<g transform="translate(14403, 121)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EmailOptions">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="EmailOptions">
+<text x="0.0" y="13.5" stroke="none" data-name="EmailOptions">+email: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="EmailOptions">+message: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="EmailOptions">+subject: string</text>
+
+</g>
+</g>
+<g transform="translate(14403, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="EmailOptions">
+<g transform="translate(8, 8)" fill="#33322E" data-name="EmailOptions">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

@@ -10,7 +10,7 @@ var Genders;
 var Condition;
 (function (Condition) {
     Condition["GOOD"] = "STARE BUN\u0102";
-    Condition["EXCELLENT"] = "STARE EXCELENTA";
+    Condition["EXCELLENT"] = "STARE EXCELENT\u0102";
     Condition["SATISFYING"] = "STARE SATISFACATOARE";
     Condition["UNWORN"] = "NEPURTAT";
     Condition["NEW"] = "NOU\u0102";

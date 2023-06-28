@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.filterPicturesByPicture = exports.savePictureFeatures = void 0;
+exports.filterImagesByPicture = exports.savePictureFeatures = void 0;
 const axios_1 = __importDefault(require("axios"));
 const config_1 = require("../../config");
 const savePictureFeatures = (pictureName) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,7 +27,7 @@ const savePictureFeatures = (pictureName) => __awaiter(void 0, void 0, void 0, f
     }
 });
 exports.savePictureFeatures = savePictureFeatures;
-const filterPicturesByPicture = (pictureName) => __awaiter(void 0, void 0, void 0, function* () {
+const filterImagesByPicture = (pictureName) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield axios_1.default.get(`${config_1.config.urlFiltersServer}/pictures/${pictureName}`);
         return response.data;
@@ -36,4 +36,4 @@ const filterPicturesByPicture = (pictureName) => __awaiter(void 0, void 0, void 
         return null;
     }
 });
-exports.filterPicturesByPicture = filterPicturesByPicture;
+exports.filterImagesByPicture = filterImagesByPicture;

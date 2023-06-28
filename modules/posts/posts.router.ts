@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { isAuthenticated } from "../authentication/authentication.middlewares";
 import PostsController from "./posts.controller";
 import multer from "multer";
-import { PostFilters } from "./posts.models";
+import { KeywordsFilter, PostFilters } from "./posts.models";
 import {
   validateAddPostRequest,
   validatePostId,
@@ -35,6 +35,20 @@ router.get(
   ) => {
     const filters: PostFilters = req.query;
     const { statusCode, body } = await PostsController.getPosts(filters);
+    res.status(statusCode).send(body);
+  }
+);
+
+router.get(
+  "/keywordsFilter",
+  async (
+    req: Request<unknown, unknown, unknown, KeywordsFilter>,
+    res: Response
+  ) => {
+    const { words } = req.query;
+    const { statusCode, body } = await PostsController.getPostsByKeywords(
+      words
+    );
     res.status(statusCode).send(body);
   }
 );

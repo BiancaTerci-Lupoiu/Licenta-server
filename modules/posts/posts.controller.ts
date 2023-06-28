@@ -33,6 +33,7 @@ import {
   AddPostBody,
   IPostModel,
   IPostModelWithId,
+  IPostModelWithPercentage,
   PostFilters,
   UpdatePostBody,
 } from "./posts.models";
@@ -52,6 +53,17 @@ export default class PostsController {
     @Query() filters: PostFilters
   ): Promise<ControllerResponse<IPostModel[] | ControllerError>> {
     return await PostsService.getPostsList(filters);
+  }
+
+  @Get("/")
+  @Response<{ message: ErrorMessageCode.INTERNAL_SERVER_ERROR }>(
+    StatusCodes.INTERNAL_SERVER_ERROR,
+    HttpErrorMessages.INTERNAL_SERVER_ERROR
+  )
+  public static async getPostsByKeywords(
+    @Query() words: string
+  ): Promise<ControllerResponse<IPostModel[] | ControllerError>> {
+    return await PostsService.getPostsListByKeywords(words);
   }
 
   @Get("/user")
@@ -177,7 +189,7 @@ export default class PostsController {
   public static async filterByPicture(
     @Request() _request: ExpressRequest,
     @Body() picture: string
-  ): Promise<ControllerResponse<IPostModel[] | ControllerError>> {
+  ): Promise<ControllerResponse<IPostModelWithPercentage[] | ControllerError>> {
     return await PostsService.filterByPicture(picture);
   }
 

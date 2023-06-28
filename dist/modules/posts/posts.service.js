@@ -34,6 +34,37 @@ class PostsService {
             return toolkit_1.ResponseFactory.createResponse(posts);
         });
     }
+    static getPostsListByKeywords(words) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let posts = yield posts_dal_1.default.getPostsList();
+            if (!posts) {
+                return toolkit_1.ResponseFactory.createNotFoundError();
+            }
+            if (!words) {
+                return toolkit_1.ResponseFactory.createResponse(posts);
+            }
+            words = words
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/\s+/g, " ");
+            const wordsList = words.split(" ");
+            posts = posts.filter((post) => {
+                const postProperties = JSON.stringify(post)
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
+                for (const word of wordsList) {
+                    const matched = postProperties.includes(word);
+                    if (!matched) {
+                        return false;
+                    }
+                }
+                return true;
+            });
+            return toolkit_1.ResponseFactory.createResponse(posts);
+        });
+    }
     static getPostsForUser(userId) {
         return __awaiter(this, void 0, void 0, function* () {
             const posts = yield posts_dal_1.default.getPostsForUser(userId);
@@ -46,7 +77,10 @@ class PostsService {
     }
     static filterByPicture(picture) {
         return __awaiter(this, void 0, void 0, function* () {
-            const picturesPaths = (yield (0, filtersServerApis_1.filterPicturesByPicture)(picture)).pictures;
+            const filterResponse = yield (0, filtersServerApis_1.filterImagesByPicture)(picture);
+            console.log(filterResponse);
+            const picturesPaths = filterResponse.pictures;
+            const percentages = filterResponse.percentages;
             if (!picturesPaths) {
                 return toolkit_1.ResponseFactory.createInternalServerError();
             }
@@ -61,7 +95,17 @@ class PostsService {
                 const indexB = picturesPaths.indexOf(post2.picture);
                 return indexA - indexB;
             });
-            return toolkit_1.ResponseFactory.createResponse(posts);
+            console.log("Postari");
+            console.log(posts);
+            let postsWithPercentages = [];
+            for (let i = 0; i < posts.length; i++) {
+                let oldPost = Object.assign({}, posts[i]);
+                oldPost = oldPost._doc;
+                oldPost.percentage = percentages[i];
+                postsWithPercentages.push(oldPost);
+            }
+            console.log(postsWithPercentages);
+            return toolkit_1.ResponseFactory.createResponse(postsWithPercentages);
         });
     }
     static getPostById(postId) {

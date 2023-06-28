@@ -21,6 +21,17 @@ const sendEmail = async (options: EmailOptions) => {
   }
 };
 
-export const emailVerifiedPageContent = `<html><body><div>Account activated successfully! <br> Click here to return to the login page: <a href='${config.urlFrontend}/login'>Log in</a></div></body></html>`;
+export const emailVerifiedPageContent = `<html>
+
+<body>
+    <div style="display:flex;align-items: center;justify-content: center;flex-direction:column">
+        <div>
+            <h2>Cont activat cu succes!</h2>
+        </div>
+        <div>Apăsați aici pentru a reveni la pagina de login: <a href='${config.urlFrontend}/login'>Log in</a></div>
+    </div>
+</body>
+
+</html>`;
 
 export default sendEmail;

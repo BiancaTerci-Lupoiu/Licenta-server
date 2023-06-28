@@ -9,7 +9,7 @@ export enum Genders {
 
 export enum Condition {
   GOOD = "STARE BUNĂ",
-  EXCELLENT = "STARE EXCELENTA",
+  EXCELLENT = "STARE EXCELENTĂ",
   SATISFYING = "STARE SATISFACATOARE",
   UNWORN = "NEPURTAT",
   NEW = "NOUĂ",
@@ -42,6 +42,10 @@ export interface IPostModel {
   picture?: string;
   category: Category;
   coordinates: Coordinates;
+}
+
+export interface IPostModelWithPercentage {
+  percentage: number;
 }
 
 export interface AddPostBody {
@@ -82,4 +86,8 @@ export interface PostFilters {
   minPrice?: number;
   maxPrice?: number;
   picture?: string[];
+}
+
+export interface KeywordsFilter {
+  words: string;
 }

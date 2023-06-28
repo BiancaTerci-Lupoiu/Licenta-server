@@ -35,6 +35,11 @@ let PostsController = class PostsController {
             return yield posts_service_1.default.getPostsList(filters);
         });
     }
+    static getPostsByKeywords(words) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield posts_service_1.default.getPostsListByKeywords(words);
+        });
+    }
     static getPostsForUser(_request) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!_request.authenticatedUser) {
@@ -91,6 +96,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], PostsController, "getPosts", null);
+__decorate([
+    (0, tsoa_1.Get)("/"),
+    (0, tsoa_1.Response)(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR, toolkit_1.HttpErrorMessages.INTERNAL_SERVER_ERROR),
+    __param(0, (0, tsoa_1.Query)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], PostsController, "getPostsByKeywords", null);
 __decorate([
     (0, tsoa_1.Get)("/user"),
     (0, tsoa_1.Response)(http_status_codes_1.StatusCodes.INTERNAL_SERVER_ERROR, toolkit_1.HttpErrorMessages.INTERNAL_SERVER_ERROR),

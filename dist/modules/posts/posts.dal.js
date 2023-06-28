@@ -34,6 +34,7 @@ let PostsDal = class PostsDal {
     static getPostsListFiltered(filters) {
         return __awaiter(this, void 0, void 0, function* () {
             const query = { isActive: true };
+            console.log(filters);
             if (filters.type) {
                 query["category.type"] = { $in: filters.type };
             }
@@ -64,7 +65,9 @@ let PostsDal = class PostsDal {
             if (filters.minPrice && filters.maxPrice) {
                 query.price = { $gte: filters.minPrice, $lte: filters.maxPrice };
             }
-            const posts = (yield posts_schema_1.PostData.find(query).populate("user", {
+            const options = { collation: { locale: "en", strength: 1 } };
+            console.log(query);
+            const posts = (yield posts_schema_1.PostData.find(query, {}, options).populate("user", {
                 password: 0,
                 role: 0,
                 iban: 0,

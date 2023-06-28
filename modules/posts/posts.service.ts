@@ -8,7 +8,7 @@ import {
 import UsersDal from "../users/users.dal";
 import { UpdateUserBody } from "../users/users.models";
 import {
-  filterPicturesByPicture,
+  filterImagesByPicture,
   savePictureFeatures,
 } from "../utils/filtersServerApis";
 import PostsDal from "./posts.dal";
@@ -16,6 +16,7 @@ import {
   AddPostBody,
   IPostModel,
   IPostModelWithId,
+  IPostModelWithPercentage,
   PostFilters,
   UpdatePostBody,
 } from "./posts.models";
@@ -39,6 +40,42 @@ export default class PostsService {
     return ResponseFactory.createResponse(posts);
   }
 
+  public static async getPostsListByKeywords(
+    words: string
+  ): Promise<ControllerResponse<IPostModel[] | ControllerError>> {
+    let posts = await PostsDal.getPostsList();
+
+    if (!posts) {
+      return ResponseFactory.createNotFoundError();
+    }
+
+    if (!words) {
+      return ResponseFactory.createResponse(posts);
+    }
+
+    words = words
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ");
+    const wordsList = words.split(" ");
+    // Filter the posts based on the words list
+    posts = posts.filter((post) => {
+      const postProperties = JSON.stringify(post)
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+      for (const word of wordsList) {
+        const matched = postProperties.includes(word);
+        if (!matched) {
+          return false;
+        }
+      }
+      return true;
+    });
+    return ResponseFactory.createResponse(posts);
+  }
+
   public static async getPostsForUser(
     userId: string
   ): Promise<ControllerResponse<IPostModel[] | ControllerError>> {
@@ -52,8 +89,11 @@ export default class PostsService {
 
   public static async filterByPicture(
     picture: string
-  ): Promise<ControllerResponse<IPostModel[] | ControllerError>> {
-    const picturesPaths = (await filterPicturesByPicture(picture)).pictures;
+  ): Promise<ControllerResponse<IPostModelWithPercentage[] | ControllerError>> {
+    const filterResponse = await filterImagesByPicture(picture);
+    console.log(filterResponse);
+    const picturesPaths = filterResponse.pictures;
+    const percentages = filterResponse.percentages;
 
     if (!picturesPaths) {
       return ResponseFactory.createInternalServerError();
@@ -72,7 +112,19 @@ export default class PostsService {
       return indexA - indexB;
     });
 
-    return ResponseFactory.createResponse(posts);
+    console.log("Postari");
+    console.log(posts);
+    let postsWithPercentages: IPostModelWithPercentage[] = [];
+    for (let i = 0; i < posts.length; i++) {
+      let oldPost: any = { ...posts[i] };
+      oldPost = oldPost._doc;
+      oldPost.percentage = percentages[i];
+      postsWithPercentages.push(oldPost);
+    }
+
+    console.log(postsWithPercentages);
+
+    return ResponseFactory.createResponse(postsWithPercentages);
   }
 
   public static async getPostById(
