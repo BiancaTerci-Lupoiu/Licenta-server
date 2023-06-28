@@ -9,6 +9,7 @@ import {
   validateUpdatePostRequest,
 } from "./posts.validators";
 import { validateFileExtension } from "../utils/fileExtensionValidator";
+import cors from "cors";
 
 const storageEngine = multer.diskStorage({
   destination: "public/images/posts/",
@@ -26,7 +27,7 @@ const storageEngine = multer.diskStorage({
 const upload = multer({ storage: storageEngine }); // Destination folder for uploaded files
 
 const router = Router();
-
+router.use(cors({ origin: "*" }));
 router.get(
   "/",
   async (

@@ -19,6 +19,8 @@ const upload = multer({ storage: storageEngine }); // Destination folder for upl
 
 const router = Router();
 
+router.use(cors({ origin: "*" }));
+
 router.get("/", async (req: Request, res: Response) => {
   const { statusCode, body } = await UsersController.getUsers(req);
   res.status(statusCode).send(body);

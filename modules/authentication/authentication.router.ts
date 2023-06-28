@@ -8,7 +8,7 @@ import {
 import { validationResult } from "express-validator";
 const router = Router();
 
-//router.use(cors({ origin: "*" }));
+router.use(cors({ origin: "*" }));
 router.post(
   "/login",
   validateLoginRequest,
