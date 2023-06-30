@@ -19,8 +19,10 @@
     "noFallthroughCasesInSwitch": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noUnusedParameters": true,
     "removeComments": true,
-    "typeRoots": ["./types", "node_modules/@types"]
+    "typeRoots": ["./types", "node_modules/@types"],
+    
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   }
 }
