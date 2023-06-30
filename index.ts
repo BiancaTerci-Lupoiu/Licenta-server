@@ -17,7 +17,9 @@ mongoose.set("strictQuery", true);
 mongoose
   .connect(config.connectionString)
   .then(() => console.log("Connected to database!"))
-  .catch(() => console.log("Failed to connect to database!"));
+  .catch(() =>
+    console.log("Failed to connect to database!", config.connectionString)
+  );
 
 app.use(express.static("public"));
 

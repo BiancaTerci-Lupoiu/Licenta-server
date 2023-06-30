@@ -14,7 +14,7 @@ mongoose_1.default.set("strictQuery", true);
 mongoose_1.default
     .connect(config_1.config.connectionString)
     .then(() => console.log("Connected to database!"))
-    .catch(() => console.log("Failed to connect to database!"));
+    .catch(() => console.log("Failed to connect to database!", config_1.config.connectionString));
 app.use(express_1.default.static("public"));
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
