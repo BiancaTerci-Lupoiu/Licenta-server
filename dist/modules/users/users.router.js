@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const users_controller_1 = __importDefault(require("./users.controller"));
+const cors_1 = __importDefault(require("cors"));
 const authentication_middlewares_1 = require("../authentication/authentication.middlewares");
 const multer_1 = __importDefault(require("multer"));
 const users_validators_1 = require("./users.validators");
@@ -27,6 +28,7 @@ const storageEngine = multer_1.default.diskStorage({
 });
 const upload = (0, multer_1.default)({ storage: storageEngine });
 const router = (0, express_1.Router)();
+router.use((0, cors_1.default)({ origin: "*" }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { statusCode, body } = yield users_controller_1.default.getUsers(req);
     res.status(statusCode).send(body);

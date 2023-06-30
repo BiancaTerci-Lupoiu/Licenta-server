@@ -14,8 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const authentication_controller_1 = __importDefault(require("./authentication.controller"));
+const cors_1 = __importDefault(require("cors"));
 const authentication_validators_1 = require("./authentication.validators");
 const router = (0, express_1.Router)();
+router.use((0, cors_1.default)({ origin: "*" }));
 router.post("/login", authentication_validators_1.validateLoginRequest, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { statusCode, body } = yield authentication_controller_1.default.loginUser(req, req.body);
     res.status(statusCode).send(body);

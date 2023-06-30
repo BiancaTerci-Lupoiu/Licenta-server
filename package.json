@@ -1,10 +1,13 @@
 {
+  "engines": {
+    "node": "14.x"
+  },
   "name": "backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "build": "CI=false npx tsc",
+    "build": "npx tsc",
     
     "start": "node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""

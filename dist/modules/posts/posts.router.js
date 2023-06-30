@@ -18,6 +18,7 @@ const posts_controller_1 = __importDefault(require("./posts.controller"));
 const multer_1 = __importDefault(require("multer"));
 const posts_validators_1 = require("./posts.validators");
 const fileExtensionValidator_1 = require("../utils/fileExtensionValidator");
+const cors_1 = __importDefault(require("cors"));
 const storageEngine = multer_1.default.diskStorage({
     destination: "public/images/posts/",
     filename: (req, file, cb) => {
@@ -32,6 +33,7 @@ const storageEngine = multer_1.default.diskStorage({
 });
 const upload = (0, multer_1.default)({ storage: storageEngine });
 const router = (0, express_1.Router)();
+router.use((0, cors_1.default)({ origin: "*" }));
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const filters = req.query;
     const { statusCode, body } = yield posts_controller_1.default.getPosts(filters);
