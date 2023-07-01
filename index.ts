@@ -15,7 +15,9 @@ app.use(
 mongoose.set("strictQuery", true);
 
 mongoose
-  .connect(config.connectionString)
+  .connect(
+    "mongodb+srv://user:user@cluster0.iwn9z9v.mongodb.net/secondLife?retryWrites=true&w=majority"
+  )
   .then(() => console.log("Connected to database!"))
   .catch(() =>
     console.log("Failed to connect to database!", config.connectionString)
