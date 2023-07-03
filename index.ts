@@ -19,9 +19,12 @@ mongoose
     "mongodb+srv://user:user@cluster0.iwn9z9v.mongodb.net/secondLife?retryWrites=true&w=majority"
   )
   .then(() => console.log("Connected to database!"))
-  .catch(() =>
-    console.log("Failed to connect to database!", config.connectionString)
-  );
+  .catch(() => {
+    console.log("Failed to connect to database!", config.connectionString);
+    console.log(
+      process.env.CONNECTION_STRING ? process.env.CONNECTION_STRING : "aaa"
+    );
+  });
 
 app.use(express.static("public"));
 
