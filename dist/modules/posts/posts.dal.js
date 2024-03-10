@@ -65,6 +65,7 @@ let PostsDal = class PostsDal {
             if (filters.minPrice && filters.maxPrice) {
                 query.price = { $gte: filters.minPrice, $lte: filters.maxPrice };
             }
+            query.isActive = true;
             const options = { collation: { locale: "en", strength: 1 } };
             console.log(query);
             const posts = (yield posts_schema_1.PostData.find(query, {}, options).populate("user", {
@@ -113,7 +114,16 @@ let PostsDal = class PostsDal {
     }
     static deletePost(postId) {
         return __awaiter(this, void 0, void 0, function* () {
+            this.deletePictureFeatures(postId);
             return yield posts_schema_1.PostData.findByIdAndDelete(new mongodb_1.ObjectId(postId));
+        });
+    }
+    static deletePictureFeatures(postId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const post = yield posts_schema_1.PostData.findById(new mongodb_1.ObjectId(postId));
+            const deletedPicturesFeatures = yield posts_schema_1.PictureFeaturesData.deleteOne({
+                pictureName: post.picture,
+            });
         });
     }
 };

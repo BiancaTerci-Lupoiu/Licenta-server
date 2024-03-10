@@ -18,6 +18,7 @@ const purchases_models_1 = require("./purchases.models");
 const stripe_1 = __importDefault(require("stripe"));
 const config_1 = require("../../config");
 const mongoose_1 = __importDefault(require("mongoose"));
+const posts_dal_1 = __importDefault(require("../posts/posts.dal"));
 const stripe = new stripe_1.default(config_1.config.stripeKey, {
     apiVersion: "2022-11-15",
 });
@@ -182,6 +183,8 @@ class PurchasesService {
                     const customer = yield stripe.customers.retrieve(data.customer);
                     console.log("Metadata");
                     console.log(customer.metadata);
+                    const postId = customer.metadata.postId;
+                    console.log(postId);
                     const purchaseId = customer.metadata.purchaseId;
                     const customerId = data.customer;
                     const paymentIntentId = data.payment_intent;
@@ -197,6 +200,13 @@ class PurchasesService {
                     if (!updatedPurchase) {
                         return toolkit_1.ResponseFactory.createBadRequestError();
                     }
+                    const updatedPost = yield posts_dal_1.default.updatePost(postId, {
+                        isActive: false,
+                    });
+                    if (!updatedPost) {
+                        return toolkit_1.ResponseFactory.createBadRequestError("Could not update post");
+                    }
+                    const deletedFeatures = yield posts_dal_1.default.deletePictureFeatures(postId);
                     return toolkit_1.ResponseFactory.createResponse(updatedPurchase);
                 }
                 catch (error) {
@@ -207,7 +217,6 @@ class PurchasesService {
             else if (eventType === "checkout.session.async_payment_failed" ||
                 eventType === "checkout.session.expired") {
                 console.log("Event failed!!");
-                console.log(data);
             }
             return toolkit_1.ResponseFactory.createInternalServerError();
         });

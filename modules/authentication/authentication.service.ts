@@ -73,6 +73,8 @@ export default class AuthenticationService {
     userDetails: AddUserBody
   ): Promise<ControllerResponse<RegisterUserResponseBody | ControllerError>> {
     const existingUser = await UsersDal.getUserByEmail(userDetails.email);
+    console.log(existingUser);
+
     if (existingUser) {
       return ResponseFactory.createBadRequestError(
         "A user with this email already exists"

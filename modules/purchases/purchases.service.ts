@@ -18,6 +18,9 @@ import Stripe from "stripe";
 import { config } from "../../config";
 import mongoose from "mongoose";
 import { Request as ExpressRequest } from "express";
+import PostsDal from "../posts/posts.dal";
+import { PictureFeaturesData, PostData } from "../posts/posts.schema";
+import { ObjectId } from "mongodb";
 
 const stripe = new Stripe(config.stripeKey, {
   apiVersion: "2022-11-15",
@@ -53,8 +56,6 @@ export default class PurchasesService {
   public static async addPurchase(
     purchaseDetails: IPurchaseModel
   ): Promise<ControllerResponse<IPurchaseModelWithId | ControllerError>> {
-    // verify if the postId is already bought by someone else
-
     const newPurchase = await PurchasesDal.addNewPurchase({
       ...purchaseDetails,
     });
@@ -227,6 +228,8 @@ export default class PurchasesService {
 
         console.log("Metadata");
         console.log(customer.metadata);
+        const postId = customer.metadata.postId;
+        console.log(postId);
         const purchaseId = customer.metadata.purchaseId;
         const customerId = data.customer;
         const paymentIntentId = data.payment_intent;
@@ -247,6 +250,15 @@ export default class PurchasesService {
         }
 
         // update the Post too and set the isActive field to false
+        const updatedPost = await PostsDal.updatePost(postId, {
+          isActive: false,
+        });
+
+        if (!updatedPost) {
+          return ResponseFactory.createBadRequestError("Could not update post");
+        }
+
+        const deletedFeatures = await PostsDal.deletePictureFeatures(postId);
 
         return ResponseFactory.createResponse(updatedPurchase);
       } catch (error: any) {
@@ -258,14 +270,6 @@ export default class PurchasesService {
       eventType === "checkout.session.expired"
     ) {
       console.log("Event failed!!");
-      console.log(data);
-      //update
-      // updatedPurchase = await PurchasesDal.updatePurchase(purchaseId, {
-      //   customerId,
-      //   paymentIntentId,
-      //   totalPrice,
-      //   status: PaymentStatus.FAILED,
-      // });
     }
     return ResponseFactory.createInternalServerError();
   }

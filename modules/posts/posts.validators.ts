@@ -102,7 +102,6 @@ export const validateAddPostRequest = [
       // All new materials are valid
       return true;
     }),
-  //validate Category
   //validate iban
   body("iban")
     .optional()

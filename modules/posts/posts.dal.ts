@@ -13,7 +13,7 @@ import {
   PostFilters,
   UpdatePostBody,
 } from "./posts.models";
-import { PostData } from "./posts.schema";
+import { PictureFeaturesData, PostData } from "./posts.schema";
 
 @ExceptionSafe(dalExceptionHandler)
 export default class PostsDal {
@@ -66,6 +66,7 @@ export default class PostsDal {
     if (filters.minPrice && filters.maxPrice) {
       query.price = { $gte: filters.minPrice, $lte: filters.maxPrice };
     }
+    query.isActive = true;
     const options = { collation: { locale: "en", strength: 1 } };
     console.log(query);
     const posts: IPostModelWithId[] =
@@ -134,6 +135,14 @@ export default class PostsDal {
   }
 
   public static async deletePost(postId: string): Promise<IPostModel | null> {
+    this.deletePictureFeatures(postId);
     return await PostData.findByIdAndDelete(new ObjectId(postId));
+  }
+
+  public static async deletePictureFeatures(postId: string) {
+    const post = await PostData.findById(new ObjectId(postId));
+    const deletedPicturesFeatures = await PictureFeaturesData.deleteOne({
+      pictureName: post.picture,
+    });
   }
 }

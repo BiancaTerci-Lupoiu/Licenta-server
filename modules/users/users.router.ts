@@ -10,7 +10,6 @@ const storageEngine = multer.diskStorage({
   destination: "public/images/users/",
   filename: (req, file, cb) => {
     const extension = file.mimetype.split("/").pop();
-    //console.log(file.mimetype); image/jpeg
     cb(null, `${req.params.userId}.${extension}`);
   },
 });
@@ -64,8 +63,6 @@ router.post(
   upload.single("picture"),
   validateFileExtension,
   async (req: Request, res: Response) => {
-    // console.log(req.params);
-    // console.log(req.body);
     console.log(req.file?.filename);
     const { userId } = req.params;
     const { statusCode, body } = await UsersController.updateUser(req, userId, {

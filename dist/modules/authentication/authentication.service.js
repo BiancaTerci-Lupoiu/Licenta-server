@@ -79,6 +79,7 @@ class AuthenticationService {
     static signupUser(userDetails) {
         return __awaiter(this, void 0, void 0, function* () {
             const existingUser = yield users_dal_1.default.getUserByEmail(userDetails.email);
+            console.log(existingUser);
             if (existingUser) {
                 return toolkit_1.ResponseFactory.createBadRequestError("A user with this email already exists");
             }

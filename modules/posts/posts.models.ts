@@ -91,3 +91,8 @@ export interface PostFilters {
 export interface KeywordsFilter {
   words: string;
 }
+
+export interface PictureFeatures {
+  features: number[];
+  pictureName: string;
+}

@@ -6,9 +6,7 @@ import { isAuthenticated } from "../authentication/authentication.middlewares";
 import { IPostModel, IPostModelWithId } from "../posts/posts.models";
 import express from "express";
 import PurchasesController from "./purchases.controller";
-import mongoose from "mongoose";
-import { PaymentStatus } from "./purchases.models";
-import PurchasesDal from "./purchases.dal";
+
 const stripe = new Stripe(config.stripeKey, {
   apiVersion: "2022-11-15",
 });

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { IUserModel, Address, UserRoles, AccountStatus } from "./users.models";
-import geocoder from "../utils/geocoder";
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -29,27 +29,6 @@ const UserDataSchema = new Schema<IUserModel>({
   status: { type: String, enum: AccountStatus, default: AccountStatus.PENDING },
   confirmationToken: { type: String, default: "" },
 });
-
-// UserDataSchema.pre("save", async function (next) {
-//   const existingAddress = this.address;
-//   console.log(this.address);
-//   if (existingAddress && JSON.stringify(existingAddress) !== "{}") {
-//     const addressString = `${existingAddress.number}, ${existingAddress.street}, ${existingAddress.city}, ${existingAddress.locality}`;
-
-//     const location = await geocoder.geocode({
-//       address: addressString,
-//       country: "Romania",
-//     });
-
-//     console.log(location);
-//     this.address = {
-//       ...existingAddress,
-//       coordinates: [location[0].longitude || 0, location[0].latitude || 0],
-//       formattedAddress: location[0].formattedAddress,
-//     };
-//   }
-//   next();
-// });
 
 UserDataSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {

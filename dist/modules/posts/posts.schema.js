@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostData = void 0;
+exports.PictureFeaturesData = exports.PostData = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const posts_models_1 = require("./posts.models");
 const Schema = mongoose_1.default.Schema;
@@ -15,6 +15,10 @@ const CategorySchema = new Schema({
 const CoordinatesSchema = new Schema({
     latitude: Number,
     longitude: Number,
+});
+const PictureFeaturesSchema = new Schema({
+    features: [Number],
+    pictureName: String,
 });
 const PostDataSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: "User" },
@@ -34,3 +38,4 @@ const PostDataSchema = new Schema({
     coordinates: CoordinatesSchema,
 });
 exports.PostData = mongoose_1.default.model("Post", PostDataSchema, "posts");
+exports.PictureFeaturesData = mongoose_1.default.model("PictureFeatures", PictureFeaturesSchema, "picturesFeatures");

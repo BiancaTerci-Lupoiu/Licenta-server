@@ -4,7 +4,8 @@ exports.config = void 0;
 require("dotenv/config");
 exports.config = {
     port: process.env.port || 8081,
-    connectionString: process.env.connection_string || "hsdjsd",
+    connectionString: process.env.connection_string ||
+        "mongodb+srv://user:user@cluster0.iwn9z9v.mongodb.net/secondLife?retryWrites=true&w=majority",
     geocoderProvider: process.env.geocoder_provider || "provider",
     geocoderApiKey: process.env.geocoder_api_key || "key",
     secretToken: process.env.secret_token || "secret_token",

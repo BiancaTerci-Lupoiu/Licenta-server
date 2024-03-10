@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
-import { Condition, Genders, IPostModel } from "./posts.models";
+import {
+  Condition,
+  Genders,
+  IPostModel,
+  PictureFeatures,
+} from "./posts.models";
 
 const Schema = mongoose.Schema;
 
@@ -12,6 +17,11 @@ const CategorySchema = new Schema({
 const CoordinatesSchema = new Schema({
   latitude: Number,
   longitude: Number,
+});
+
+const PictureFeaturesSchema = new Schema<PictureFeatures>({
+  features: [Number],
+  pictureName: String,
 });
 
 const PostDataSchema = new Schema<IPostModel>({
@@ -33,3 +43,9 @@ const PostDataSchema = new Schema<IPostModel>({
 });
 
 export const PostData = mongoose.model("Post", PostDataSchema, "posts");
+
+export const PictureFeaturesData = mongoose.model(
+  "PictureFeatures",
+  PictureFeaturesSchema,
+  "picturesFeatures"
+);
