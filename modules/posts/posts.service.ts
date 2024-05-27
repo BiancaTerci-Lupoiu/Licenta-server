@@ -4,14 +4,14 @@ import {
   ControllerError,
   ControllerResponse,
   ResponseFactory,
-} from "../../toolkit";
-import UsersDal from "../users/users.dal";
-import { UpdateUserBody } from "../users/users.models";
+} from '../../toolkit';
+import UsersDal from '../users/users.dal';
+import { UpdateUserBody } from '../users/users.models';
 import {
   filterImagesByPicture,
   savePictureFeatures,
-} from "../utils/filtersServerApis";
-import PostsDal from "./posts.dal";
+} from '../utils/filtersServerApis';
+import PostsDal from './posts.dal';
 import {
   AddPostBody,
   IPostModel,
@@ -19,10 +19,10 @@ import {
   IPostModelWithPercentage,
   PostFilters,
   UpdatePostBody,
-} from "./posts.models";
-import fs from "fs";
+} from './posts.models';
+import fs from 'fs';
 
-const DIR = "public/images/posts/";
+const DIR = 'public/images/posts/';
 
 export default class PostsService {
   public static async getPostsList(
@@ -55,16 +55,16 @@ export default class PostsService {
 
     words = words
       .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/\s+/g, " ");
-    const wordsList = words.split(" ");
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, ' ');
+    const wordsList = words.split(' ');
     // Filter the posts based on the words list
     posts = posts.filter((post) => {
       const postProperties = JSON.stringify(post)
         .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
       for (const word of wordsList) {
         const matched = postProperties.includes(word);
         if (!matched) {
@@ -112,7 +112,7 @@ export default class PostsService {
       return indexA - indexB;
     });
 
-    console.log("Postari");
+    console.log('Postari');
     console.log(posts);
     let postsWithPercentages: IPostModelWithPercentage[] = [];
     for (let i = 0; i < posts.length; i++) {
@@ -145,9 +145,9 @@ export default class PostsService {
     const user = await UsersDal.getUserById(postDetails.user.toString());
 
     if (!user) {
-      return ResponseFactory.createNotFoundError("User not found");
+      return ResponseFactory.createNotFoundError('User not found');
     }
-    console.log("updating user " + postDetails.user.toString());
+    console.log('updating user ' + postDetails.user.toString());
     console.log(addPostBody.address);
     let updateUserBody: UpdateUserBody = { address: addPostBody.address };
     if (addPostBody.iban) {
@@ -159,7 +159,7 @@ export default class PostsService {
     );
 
     if (!updatedUser) {
-      return ResponseFactory.createNotFoundError("User not found");
+      return ResponseFactory.createNotFoundError('User not found');
     }
 
     const newPost = await PostsDal.addPost(postDetails);
@@ -206,7 +206,7 @@ export default class PostsService {
 
       return ResponseFactory.createInternalServerError();
     }
-    console.log("saved features!");
+    console.log('saved features!');
     const postUpdated = await PostsDal.updatePost(postId, { picture });
     if (!postUpdated) {
       return ResponseFactory.createNotFoundError();
